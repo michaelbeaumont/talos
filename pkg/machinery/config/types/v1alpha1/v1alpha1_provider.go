@@ -1685,6 +1685,15 @@ func (e *EncryptionKey) TPM() config.EncryptionKeyTPM {
 	return e.KeyTPM
 }
 
+// Unmanaged implements the config.Provider interface.
+func (e *EncryptionKey) Unmanaged() config.EncryptionKeyUnmanaged {
+	if e.KeyUnmanaged == nil {
+		return nil
+	}
+
+	return e.KeyUnmanaged
+}
+
 // LockToSTATE implements the config.Provider interface.
 func (e *EncryptionKey) LockToSTATE() bool {
 	// not supported in v1alpha1
@@ -1699,6 +1708,15 @@ func (e *EncryptionKeyNodeID) String() string {
 // String implements the config.Provider interface.
 func (e *EncryptionKeyTPM) String() string {
 	return "tpm"
+}
+
+// String implements the config.Provider interface.
+func (e *EncryptionKeyUnmanaged) String() string {
+	return "unmanaged"
+}
+
+// Unmanaged implements the config.Provider interface.
+func (e *EncryptionKeyUnmanaged) Unmanaged() {
 }
 
 // CheckSecurebootOnEnroll implements the config.Provider interface.

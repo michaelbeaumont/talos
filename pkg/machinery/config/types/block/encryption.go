@@ -119,6 +119,9 @@ type EncryptionKey struct {
 	//     Enable TPM based disk encryption.
 	KeyTPM *EncryptionKeyTPM `yaml:"tpm,omitempty"`
 	//   description: >
+	//     Sets the slot as unmanaged by Talos
+	KeyUnmanaged *EncryptionKeyUnmanaged `yaml:"unmanaged,omitempty"`
+	//   description: >
 	//     Lock the disk encryption key to the random salt stored in the STATE partition.
 	//     This is useful to prevent the volume from being unlocked if STATE partition is compromised
 	//     or replaced. It is recommended to use this option with TPM disk encryption for
@@ -166,6 +169,9 @@ type EncryptionKeyTPMOptions struct {
 
 // EncryptionKeyNodeID represents deterministically generated key from the node UUID and PartitionLabel.
 type EncryptionKeyNodeID struct{}
+
+// EncryptionKeyUnmanaged represents a slot that isn't managed by Talos.
+type EncryptionKeyUnmanaged struct{}
 
 func exampleKMSKey() *EncryptionKeyKMS {
 	return &EncryptionKeyKMS{
@@ -296,6 +302,15 @@ func (k EncryptionKey) TPM() config.EncryptionKeyTPM {
 	return k.KeyTPM
 }
 
+// Unmanaged implements the config.Provider interface.
+func (k EncryptionKey) Unmanaged() config.EncryptionKeyUnmanaged {
+	if k.KeyUnmanaged == nil {
+		return nil
+	}
+
+	return k.KeyUnmanaged
+}
+
 // String implements the config.Provider interface.
 func (e *EncryptionKeyNodeID) String() string {
 	return "nodeid"
@@ -304,6 +319,15 @@ func (e *EncryptionKeyNodeID) String() string {
 // String implements the config.Provider interface.
 func (e *EncryptionKeyTPM) String() string {
 	return "tpm"
+}
+
+// String implements the config.Provider interface.
+func (e *EncryptionKeyUnmanaged) String() string {
+	return "unmanaged"
+}
+
+// Unmanaged implements the config.Provider interface.
+func (e *EncryptionKeyUnmanaged) Unmanaged() {
 }
 
 // CheckSecurebootOnEnroll implements the config.Provider interface.

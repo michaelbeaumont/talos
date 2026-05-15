@@ -60,6 +60,8 @@ func (a volumeConfigSpec) ApplyEncryptionConfig(in config.EncryptionConfig) erro
 			out.Encryption.Keys[i].TPMCheckSecurebootStatusOnEnroll = key.TPM().CheckSecurebootOnEnroll()
 			out.Encryption.Keys[i].TPMPCRs = key.TPM().PCRs()
 			out.Encryption.Keys[i].TPMPubKeyPCRs = key.TPM().PubKeyPCRs()
+		case key.Unmanaged() != nil:
+			out.Encryption.Keys[i].Type = block.EncryptionKeyUnmanaged
 		default:
 			return fmt.Errorf("unsupported encryption key type: slot %d", key.Slot())
 		}

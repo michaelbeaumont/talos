@@ -331,6 +331,7 @@ type EncryptionKey interface {
 	KMS() EncryptionKeyKMS
 	Slot() int
 	TPM() EncryptionKeyTPM
+	Unmanaged() EncryptionKeyUnmanaged
 	LockToSTATE() bool
 }
 
@@ -349,6 +350,12 @@ type EncryptionKeyKMS interface {
 // EncryptionKeyNodeID deterministically generated encryption key.
 type EncryptionKeyNodeID interface {
 	String() string
+}
+
+// EncryptionKeyUnmanaged marks a keyslot as unmanaged.
+type EncryptionKeyUnmanaged interface {
+	String() string
+	Unmanaged()
 }
 
 // EncryptionKeyTPM encryption key sealed by TPM.

@@ -15,4 +15,5 @@ const (
 	EncryptionKeyNodeID                          // nodeID
 	EncryptionKeyKMS                             // kms
 	EncryptionKeyTPM                             // tpm
+	EncryptionKeyUnmanaged 						 // unmanaged
 )

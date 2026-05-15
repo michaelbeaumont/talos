@@ -1733,6 +1733,9 @@ type EncryptionKey struct {
 	//   description: >
 	//     Enable TPM based disk encryption.
 	KeyTPM *EncryptionKeyTPM `yaml:"tpm,omitempty"`
+	//   description: >
+	//     Sets the slot as unmanaged by Talos
+	KeyUnmanaged *EncryptionKeyUnmanaged `yaml:"unmanaged,omitempty"`
 }
 
 // EncryptionKeyStatic represents throw away key type.
@@ -1771,6 +1774,11 @@ type EncryptionKeyTPM struct {
 //
 //docgen:nodoc
 type EncryptionKeyNodeID struct{}
+
+// EncryptionKeyUnmanaged represents a slot that isn't managed by Talos
+//
+//docgen:nodoc
+type EncryptionKeyUnmanaged struct{}
 
 // Env represents a set of environment variables.
 //
