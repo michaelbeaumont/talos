@@ -149,6 +149,13 @@ func (EncryptionKey) Doc() *encoder.Doc {
 				Comments:    [3]string{"" /* encoder.HeadComment */, "Enable TPM based disk encryption." /* encoder.LineComment */, "" /* encoder.FootComment */},
 			},
 			{
+				Name:        "unmanaged",
+				Type:        "EncryptionKeyUnmanaged",
+				Note:        "",
+				Description: "Sets the slot as unmanaged by Talos",
+				Comments:    [3]string{"" /* encoder.HeadComment */, "Sets the slot as unmanaged by Talos" /* encoder.LineComment */, "" /* encoder.FootComment */},
+			},
+			{
 				Name:        "lockToState",
 				Type:        "bool",
 				Note:        "",
@@ -279,6 +286,23 @@ func (EncryptionKeyNodeID) Doc() *encoder.Doc {
 			{
 				TypeName:  "EncryptionKey",
 				FieldName: "nodeID",
+			},
+		},
+		Fields: []encoder.Doc{},
+	}
+
+	return doc
+}
+
+func (EncryptionKeyUnmanaged) Doc() *encoder.Doc {
+	doc := &encoder.Doc{
+		Type:        "EncryptionKeyUnmanaged",
+		Comments:    [3]string{"" /* encoder.HeadComment */, "EncryptionKeyUnmanaged represents a slot that isn't managed by Talos" /* encoder.LineComment */, "" /* encoder.FootComment */},
+		Description: "EncryptionKeyUnmanaged represents a slot that isn't managed by Talos",
+		AppearsIn: []encoder.Appearance{
+			{
+				TypeName:  "EncryptionKey",
+				FieldName: "unmanaged",
 			},
 		},
 		Fields: []encoder.Doc{},
@@ -952,6 +976,7 @@ func GetFileDoc() *encoder.FileDoc {
 			EncryptionKeyTPM{}.Doc(),
 			EncryptionKeyTPMOptions{}.Doc(),
 			EncryptionKeyNodeID{}.Doc(),
+			EncryptionKeyUnmanaged{}.Doc(),
 			ExistingVolumeConfigV1Alpha1{}.Doc(),
 			VolumeDiscoverySpec{}.Doc(),
 			VolumeSelector{}.Doc(),

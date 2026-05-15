@@ -11,9 +11,9 @@ type EncryptionKeyType int
 //
 //structprotogen:gen_enum
 const (
-	EncryptionKeyStatic EncryptionKeyType = iota // static
-	EncryptionKeyNodeID                          // nodeID
-	EncryptionKeyKMS                             // kms
-	EncryptionKeyTPM                             // tpm
-	EncryptionKeyUnmanaged 						 // unmanaged
+	EncryptionKeyStatic    EncryptionKeyType = iota // static
+	EncryptionKeyNodeID                             // nodeID
+	EncryptionKeyKMS                                // kms
+	EncryptionKeyTPM                                // tpm
+	EncryptionKeyUnmanaged                          // unmanaged
 )

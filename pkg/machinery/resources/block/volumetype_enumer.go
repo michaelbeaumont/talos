@@ -317,11 +317,11 @@ func (i *FilesystemType) UnmarshalText(text []byte) error {
 	return err
 }
 
-const _EncryptionKeyTypeName = "staticnodeIDkmstpm"
+const _EncryptionKeyTypeName = "staticnodeIDkmstpmunmanaged"
 
-var _EncryptionKeyTypeIndex = [...]uint8{0, 6, 12, 15, 18}
+var _EncryptionKeyTypeIndex = [...]uint8{0, 6, 12, 15, 18, 27}
 
-const _EncryptionKeyTypeLowerName = "staticnodeidkmstpm"
+const _EncryptionKeyTypeLowerName = "staticnodeidkmstpmunmanaged"
 
 func (i EncryptionKeyType) String() string {
 	if i < 0 || i >= EncryptionKeyType(len(_EncryptionKeyTypeIndex)-1) {
@@ -338,9 +338,10 @@ func _EncryptionKeyTypeNoOp() {
 	_ = x[EncryptionKeyNodeID-(1)]
 	_ = x[EncryptionKeyKMS-(2)]
 	_ = x[EncryptionKeyTPM-(3)]
+	_ = x[EncryptionKeyUnmanaged-(4)]
 }
 
-var _EncryptionKeyTypeValues = []EncryptionKeyType{EncryptionKeyStatic, EncryptionKeyNodeID, EncryptionKeyKMS, EncryptionKeyTPM}
+var _EncryptionKeyTypeValues = []EncryptionKeyType{EncryptionKeyStatic, EncryptionKeyNodeID, EncryptionKeyKMS, EncryptionKeyTPM, EncryptionKeyUnmanaged}
 
 var _EncryptionKeyTypeNameToValueMap = map[string]EncryptionKeyType{
 	_EncryptionKeyTypeName[0:6]:        EncryptionKeyStatic,
@@ -351,6 +352,8 @@ var _EncryptionKeyTypeNameToValueMap = map[string]EncryptionKeyType{
 	_EncryptionKeyTypeLowerName[12:15]: EncryptionKeyKMS,
 	_EncryptionKeyTypeName[15:18]:      EncryptionKeyTPM,
 	_EncryptionKeyTypeLowerName[15:18]: EncryptionKeyTPM,
+	_EncryptionKeyTypeName[18:27]:      EncryptionKeyUnmanaged,
+	_EncryptionKeyTypeLowerName[18:27]: EncryptionKeyUnmanaged,
 }
 
 var _EncryptionKeyTypeNames = []string{
@@ -358,6 +361,7 @@ var _EncryptionKeyTypeNames = []string{
 	_EncryptionKeyTypeName[6:12],
 	_EncryptionKeyTypeName[12:15],
 	_EncryptionKeyTypeName[15:18],
+	_EncryptionKeyTypeName[18:27],
 }
 
 // EncryptionKeyTypeString retrieves an enum value from the enum constants string name.

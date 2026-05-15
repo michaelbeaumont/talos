@@ -3190,10 +3190,11 @@ func (NethelpersWOLMode) EnumDescriptor() ([]byte, []int) {
 type BlockEncryptionKeyType int32
 
 const (
-	BlockEncryptionKeyType_ENCRYPTION_KEY_STATIC  BlockEncryptionKeyType = 0
-	BlockEncryptionKeyType_ENCRYPTION_KEY_NODE_ID BlockEncryptionKeyType = 1
-	BlockEncryptionKeyType_ENCRYPTION_KEY_KMS     BlockEncryptionKeyType = 2
-	BlockEncryptionKeyType_ENCRYPTION_KEY_TPM     BlockEncryptionKeyType = 3
+	BlockEncryptionKeyType_ENCRYPTION_KEY_STATIC    BlockEncryptionKeyType = 0
+	BlockEncryptionKeyType_ENCRYPTION_KEY_NODE_ID   BlockEncryptionKeyType = 1
+	BlockEncryptionKeyType_ENCRYPTION_KEY_KMS       BlockEncryptionKeyType = 2
+	BlockEncryptionKeyType_ENCRYPTION_KEY_TPM       BlockEncryptionKeyType = 3
+	BlockEncryptionKeyType_ENCRYPTION_KEY_UNMANAGED BlockEncryptionKeyType = 4
 )
 
 // Enum value maps for BlockEncryptionKeyType.
@@ -3203,12 +3204,14 @@ var (
 		1: "ENCRYPTION_KEY_NODE_ID",
 		2: "ENCRYPTION_KEY_KMS",
 		3: "ENCRYPTION_KEY_TPM",
+		4: "ENCRYPTION_KEY_UNMANAGED",
 	}
 	BlockEncryptionKeyType_value = map[string]int32{
-		"ENCRYPTION_KEY_STATIC":  0,
-		"ENCRYPTION_KEY_NODE_ID": 1,
-		"ENCRYPTION_KEY_KMS":     2,
-		"ENCRYPTION_KEY_TPM":     3,
+		"ENCRYPTION_KEY_STATIC":    0,
+		"ENCRYPTION_KEY_NODE_ID":   1,
+		"ENCRYPTION_KEY_KMS":       2,
+		"ENCRYPTION_KEY_TPM":       3,
+		"ENCRYPTION_KEY_UNMANAGED": 4,
 	}
 )
 
@@ -4397,12 +4400,13 @@ const file_resource_definitions_enums_enums_proto_rawDesc = "" +
 	"\x12WOL_MODE_BROADCAST\x10\b\x12\x12\n" +
 	"\x0eWOL_MODE_MAGIC\x10 \x12\x19\n" +
 	"\x15WOL_MODE_MAGIC_SECURE\x10@\x12\x14\n" +
-	"\x0fWOL_MODE_FILTER\x10\x80\x01*\x7f\n" +
+	"\x0fWOL_MODE_FILTER\x10\x80\x01*\x9d\x01\n" +
 	"\x16BlockEncryptionKeyType\x12\x19\n" +
 	"\x15ENCRYPTION_KEY_STATIC\x10\x00\x12\x1a\n" +
 	"\x16ENCRYPTION_KEY_NODE_ID\x10\x01\x12\x16\n" +
 	"\x12ENCRYPTION_KEY_KMS\x10\x02\x12\x16\n" +
-	"\x12ENCRYPTION_KEY_TPM\x10\x03*Z\n" +
+	"\x12ENCRYPTION_KEY_TPM\x10\x03\x12\x1c\n" +
+	"\x18ENCRYPTION_KEY_UNMANAGED\x10\x04*Z\n" +
 	"\x1bBlockEncryptionProviderType\x12\x1c\n" +
 	"\x18ENCRYPTION_PROVIDER_NONE\x10\x00\x12\x1d\n" +
 	"\x19ENCRYPTION_PROVIDER_LUKS2\x10\x01*\xd1\x01\n" +

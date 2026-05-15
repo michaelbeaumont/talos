@@ -53,6 +53,13 @@
           "markdownDescription": "Enable TPM based disk encryption.",
           "x-intellij-html-description": "\u003cp\u003eEnable TPM based disk encryption.\u003c/p\u003e\n"
         },
+        "unmanaged": {
+          "$ref": "#/$defs/block.EncryptionKeyUnmanaged",
+          "title": "unmanaged",
+          "description": "Sets the slot as unmanaged by Talos\n",
+          "markdownDescription": "Sets the slot as unmanaged by Talos",
+          "x-intellij-html-description": "\u003cp\u003eSets the slot as unmanaged by Talos\u003c/p\u003e\n"
+        },
         "lockToState": {
           "type": "boolean",
           "title": "lockToState",
@@ -136,6 +143,12 @@
       "additionalProperties": false,
       "type": "object",
       "description": "EncryptionKeyTPMOptions represents the options for TPM-based key protection."
+    },
+    "block.EncryptionKeyUnmanaged": {
+      "properties": {},
+      "additionalProperties": false,
+      "type": "object",
+      "description": "EncryptionKeyUnmanaged represents a slot that isn't managed by Talos"
     },
     "block.EncryptionSpec": {
       "properties": {
