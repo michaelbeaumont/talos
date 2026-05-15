@@ -62,9 +62,16 @@ func NewHandler(encryptionConfig block.EncryptionSpec, volumeID string, helpers 
 		opts = append(opts, luks.WithPerfOptions(encryptionConfig.PerfOptions...))
 	}
 
+	unmanagedKeySlots := map[int64]bool{}
 	keyHandlers := make([]keys.Handler, 0, len(encryptionConfig.Keys))
 
 	for _, cfg := range encryptionConfig.Keys {
+		if cfg.Type == block.EncryptionKeyUnmanaged {
+			unmanagedKeySlots[int64(cfg.Slot)] = true
+
+			continue
+		}
+
 		handler, err := keys.NewHandler(
 			cfg,
 			keys.WithVolumeID(volumeID),
@@ -90,6 +97,7 @@ func NewHandler(encryptionConfig block.EncryptionSpec, volumeID string, helpers 
 	return &Handler{
 		encryptionProvider: provider,
 		keyHandlers:        keyHandlers,
+		unmanagedKeySlots:  unmanagedKeySlots,
 		saltGetter:         helpers.SaltGetter,
 	}, nil
 }
@@ -99,6 +107,7 @@ func NewHandler(encryptionConfig block.EncryptionSpec, volumeID string, helpers 
 type Handler struct {
 	encryptionProvider encryption.Provider
 	keyHandlers        []keys.Handler
+	unmanagedKeySlots  map[int64]bool
 	saltGetter         helpers.SaltGetter
 }
 
@@ -244,6 +253,10 @@ func (h *Handler) syncKeys(ctx context.Context, logger *zap.Logger, path string,
 			s, err := strconv.ParseInt(slot, 10, 64)
 			if err != nil {
 				return nil, err
+			}
+
+			if h.unmanagedKeySlots[s] {
+				continue
 			}
 
 			if err = h.encryptionProvider.RemoveKey(ctx, path, int(s), k); err != nil {

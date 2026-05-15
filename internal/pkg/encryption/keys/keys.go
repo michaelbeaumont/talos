@@ -68,6 +68,8 @@ func NewHandler(cfg block.EncryptionKey, options ...KeyOption) (Handler, error) 
 		if err != nil {
 			return nil, err
 		}
+	case block.EncryptionKeyUnmanaged:
+		return nil, fmt.Errorf("unmanaged keys have no handler")
 	default:
 		return nil, fmt.Errorf("unsupported key type: %s", cfg.Type)
 	}
